@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AddNote extends StatefulWidget {
@@ -19,17 +21,47 @@ class _AddNoteState extends State<AddNote> {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(children: [
-              Row(children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 ElevatedButton(
-                  onPressed: (() {}),
-                  child: Icon(
+                  onPressed: (() {
+                    Navigator.of(context).pop();
+                  }),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      Colors.grey[700],
+                    ),
+                    padding:
+                        MaterialStateProperty.all(const EdgeInsets.symmetric(
+                      horizontal: 25.0,
+                      vertical: 7.0,
+                    )),
+                  ),
+                  child: const Icon(
                     Icons.arrow_back,
                   ),
+                ),
+                ElevatedButton(
+                  onPressed: add,
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                    Colors.grey[700],
-                  )),
-                )
+                    backgroundColor: MaterialStateProperty.all(
+                      Colors.grey[700],
+                    ),
+                    padding:
+                        MaterialStateProperty.all(const EdgeInsets.symmetric(
+                      horizontal: 25.0,
+                      vertical: 7.0,
+                    )),
+                  ),
+                  child: const Text(
+                    'save',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: 'lato',
+                      fontWeight: FontWeight.normal,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ]),
               const SizedBox(
                 height: 12.0,
@@ -41,7 +73,7 @@ class _AddNoteState extends State<AddNote> {
                     decoration: const InputDecoration.collapsed(
                       hintText: 'Title',
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 36.0,
                       fontFamily: 'lato',
                       fontWeight: FontWeight.bold,
@@ -50,7 +82,26 @@ class _AddNoteState extends State<AddNote> {
                     onChanged: (_val) {
                       title = _val;
                     },
-                  )
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    padding: const EdgeInsets.only(top: 12.0),
+                    child: TextFormField(
+                      decoration: const InputDecoration.collapsed(
+                        hintText: 'note description',
+                      ),
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                        fontFamily: 'lato',
+                        fontWeight: FontWeight.normal,
+                        color: Colors.grey,
+                      ),
+                      onChanged: (_val) {
+                        des = _val;
+                      },
+                      maxLines: 20,
+                    ),
+                  ),
                 ],
               ))
             ]),
@@ -59,4 +110,19 @@ class _AddNoteState extends State<AddNote> {
       ),
     );
   }
+
+  void add() {
+    CollectionReference ref = FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection('notes');
+    var data = {
+      'title': title,
+      'description': des,
+      'created': DateTime.now(),
+    };
+    ref.add(data);
+    Navigator.pop(context);
+  }
+  //save to db
 }
