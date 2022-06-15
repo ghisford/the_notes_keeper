@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "331919386374",
+    "project_id": "nzimakeeperofnotes",
+    "storage_bucket": "nzimakeeperofnotes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331919386374:android:e55788b94a905ed74da087",
+        "android_client_info": {
+          "package_name": "com.example.notes_keeper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "331919386374-f548r3jk2j8k9qhqhlqrmc7okjoem4jp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.notes_keeper",
+            "certificate_hash": "a08b5fee592c34d5e840066817605b7f3ecabdc3"
+          }
+        },
+        {
+          "client_id": "331919386374-e3jvmdi3c87oo0j2lo71nfei7s021khk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKIvwkjtc98gDZq3rpzCmmC-Ulr4kpj7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331919386374-e3jvmdi3c87oo0j2lo71nfei7s021khk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "331919386374-cf072ageake52m2mlbfu12l4jqev5cfg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.notesKeeper"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
