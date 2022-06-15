@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 10.0,
+                horizontal: 11.0,
                 vertical: 12.0,
               ),
               child: Text(
