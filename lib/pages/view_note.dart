@@ -2,20 +2,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class viewNote extends StatefulWidget {
+class ViewNote extends StatefulWidget {
   final Map data;
   final String time;
   final DocumentReference ref;
 
-  const viewNote(
+  const ViewNote(
       {Key? key, required this.data, required this.time, required this.ref})
       : super(key: key);
 
   @override
-  State<viewNote> createState() => _viewNoteState();
+  State<ViewNote> createState() => _ViewNoteState();
 }
 
-class _viewNoteState extends State<viewNote> {
+class _ViewNoteState extends State<ViewNote> {
   late String title;
   late String des;
 
@@ -47,7 +47,7 @@ class _viewNoteState extends State<viewNote> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: add,
+                  onPressed: delete,
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
                       Colors.red[300],
@@ -78,22 +78,27 @@ class _viewNoteState extends State<viewNote> {
                       color: Colors.grey,
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 12.0),
+                    child: Text(
+                      widget.time,
+                      style: const TextStyle(
+                        fontSize: 23.0,
+                        fontFamily: 'lato',
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.75,
-                    padding: const EdgeInsets.only(top: 12.0),
-                    child: TextFormField(
-                      decoration: const InputDecoration.collapsed(
-                        hintText: 'note description',
-                      ),
+                    child: Text(
+                      "${widget.data['description']}",
                       style: const TextStyle(
                         fontSize: 18.0,
                         fontFamily: 'lato',
                         fontWeight: FontWeight.normal,
                         color: Colors.grey,
                       ),
-                      onChanged: (_val) {
-                        des = _val;
-                      },
                       maxLines: 20,
                     ),
                   ),
@@ -106,17 +111,8 @@ class _viewNoteState extends State<viewNote> {
     );
   }
 
-  void add() {
-    CollectionReference ref = FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .collection('notes');
-    var data = {
-      'title': title,
-      'description': des,
-      'created': DateTime.now(),
-    };
-    ref.add(data);
+  void delete() async {
+    await widget.ref.delete();
     Navigator.pop(context);
   }
   //save to db
