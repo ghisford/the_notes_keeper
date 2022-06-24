@@ -18,9 +18,12 @@ class _LoginPageState extends State<LoginPage> {
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                            'assets/images/photo-1513128034602-7814ccaddd4e'))),
+                  image: DecorationImage(
+                    image: AssetImage(
+                      'assets/images/images',
+                    ),
+                  ),
+                ),
               ),
             ),
             const Padding(
@@ -74,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(
-              height: 10.0,
+              height: 100.0,
             )
           ],
         ),
